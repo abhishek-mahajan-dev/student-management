@@ -1,0 +1,33 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa; 
+}
+
+.container {
+    max-width: 900px; 
+}
+
+.card {
+    border-radius: 0.75rem;
+    border: none; 
+}
+
+.card-header {
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    font-weight: bold;
+}
+
+.btn {
+    border-radius: 0.5rem; 
+}
+
+.table {
+    border-radius: 0.5rem;
+    overflow: hidden; 
+}
+
+.table thead th {
+    background-color: #e9ecef; 
+    border-bottom: 2px solid #dee2e6;
+}
