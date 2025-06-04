@@ -8,6 +8,9 @@ public class Student {
     private String id;
     private String name;
     private List<Subject> subjects;
+    private double averageMarks;
+    private String grade;
+
 
     public Student()
     {
@@ -26,7 +29,7 @@ public class Student {
     {
         return id;
     }
-    public void SetId(String id)
+    public void setId(String id)
     {
         this.id=id;
     }
@@ -49,5 +52,21 @@ public class Student {
         this.subjects = subjects;
     }
 
-    
+    public double getAverageMarks()
+    {
+        return averageMarks;
+    }
+    public void setAverageMarks(double averageMarks)
+    {
+        this.averageMarks=averageMarks;
+    }
+
+    public String getGrade() 
+    {
+        return grade;
+    }
+    public void setGrade(String grade)
+     {
+        this.grade = grade;
+    }  
 }

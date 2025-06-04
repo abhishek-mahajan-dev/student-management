@@ -1,33 +1,110 @@
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f8f9fa; 
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-    max-width: 900px; 
+    max-width: 900px;
+    padding: 1rem;
 }
 
 .card {
     border-radius: 0.75rem;
-    border: none; 
+    border: none;
 }
 
 .card-header {
     border-top-left-radius: 0.75rem;
     border-top-right-radius: 0.75rem;
     font-weight: bold;
+    padding: 1rem 1.5rem;
+}
+
+.form-control {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
 }
 
 .btn {
-    border-radius: 0.5rem; 
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
 }
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-light {
+    color: #343a40;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+.btn-light:hover {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
 
 .table {
     border-radius: 0.5rem;
-    overflow: hidden; 
+    overflow: hidden;
+    margin-bottom: 0;
 }
 
 .table thead th {
-    background-color: #e9ecef; 
+    background-color: #e9ecef;
     border-bottom: 2px solid #dee2e6;
+    padding: 1rem;
+    text-align: left;
+}
+
+.table tbody td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+@media (max-width: 768px) {
+    .col-md-6, .col-md-4, .col-md-2 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    .subject-group .col-md-2 {
+        margin-top: 0.5rem;
+    }
 }
