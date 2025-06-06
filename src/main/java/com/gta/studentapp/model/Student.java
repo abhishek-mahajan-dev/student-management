@@ -15,7 +15,6 @@ public class Student {
     public Student()
     {
         this.subjects=new ArrayList<>();
-
     }
 
     public Student(String id,String name)

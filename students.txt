@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "name": "Test 1",
+    "subjects": [
+      {
+        "name": "Science",
+        "marks": 95.0
+      },
+      {
+        "name": "Maths",
+        "marks": 80.0
+      },
+      {
+        "name": "English",
+        "marks": 86.0
+      }
+    ],
+    "averageMarks": 87.0,
+    "grade": "B"
+  },
+  {
+    "id": "2",
+    "name": "Test 2",
+    "subjects": [
+      {
+        "name": "Science",
+        "marks": 60.0
+      },
+      {
+        "name": "Maths",
+        "marks": 67.0
+      },
+      {
+        "name": "English",
+        "marks": 64.0
+      }
+    ],
+    "averageMarks": 63.67,
+    "grade": "D"
+  },
+  {
+    "id": "3",
+    "name": "Test 3",
+    "subjects": [
+      {
+        "name": "Science",
+        "marks": 98.0
+      },
+      {
+        "name": "Maths",
+        "marks": 93.0
+      },
+      {
+        "name": "English",
+        "marks": 95.0
+      }
+    ],
+    "averageMarks": 95.33,
+    "grade": "A"
+  },
+  {
+    "id": "4",
+    "name": "Test 4",
+    "subjects": [
+      {
+        "name": "Science",
+        "marks": 80.0
+      },
+      {
+        "name": "Maths",
+        "marks": 82.0
+      },
+      {
+        "name": "English",
+        "marks": 85.0
+      }
+    ],
+    "averageMarks": 82.33,
+    "grade": "B"
+  }
+]
