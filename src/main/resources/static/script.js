@@ -6,9 +6,22 @@ document.addEventListener('DOMContentLoaded', () =>
     const addSubjectBtn = document.getElementById('addSubjectBtn');
     const sortPerformanceBtn = document.getElementById('sortPerformanceBtn');
     const sortArrow = document.getElementById('sortArrow');
+    const searchStudentInput = document.getElementById('searchStudentInput');
+    const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
+    const modalMessageContent = document.getElementById('modalMessageContent');
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const modeIcon = document.getElementById("modeIcon");
 
     let currentStudents = [];
     let sortAscending = false;
+
+    
+
+    const showMessage = (message) =>
+        {
+        modalMessageContent.textContent = message;
+        messageModal.show();
+        }
 
     const createSubjectInputGroup = () =>
     {
@@ -32,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () =>
             {
                 subjectGroup.remove();
             } else {
-                alert('A student must have at least one subject. Cannot remove the last one.');
+                showMessage('A student must have at least one subject. Cannot remove the last one.'); 
             }
         });
 
@@ -48,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () =>
         }
         else
         {
-            alert('A student must have at least one subject. Cannot remove the last one.');
+            showMessage('A student must have at least one subject. Cannot remove the last one.'); 
         }
     });
 
@@ -64,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () =>
 
         if (studentsToRender.length === 0)
         {
-            studentTableBody.innerHTML = '<tr><td colspan="5" class="text-center">No students found. Add some!</td></tr>';
+            studentTableBody.innerHTML = '<tr><td colspan="5" class="text-center">No students found.</td></tr>';
             return;
         }
 
@@ -81,19 +94,20 @@ document.addEventListener('DOMContentLoaded', () =>
         });
     };
 
-    const fetchAndDisplayStudents = async () =>
+    const fetchAndDisplayStudents = async (searchQuery = '') => 
     {
         studentTableBody.innerHTML = '<tr><td colspan="5" class="text-center">Loading students...</td></tr>';
 
         try {
-            const response = await fetch('/students');
+            const url = searchQuery ? `/students?name=${encodeURIComponent(searchQuery)}` : '/students';
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             currentStudents = await response.json();
             renderStudentsTable(currentStudents);
         } catch (error) {
-            alert('Could not load student data. Please check your internet connection or try refreshing the page.');
+            showMessage('Could not load student data. Please check your internet connection or try refreshing the page.');
             studentTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-danger">Failed to load students. Please try again later.</td>';
         }
     };
@@ -120,6 +134,12 @@ document.addEventListener('DOMContentLoaded', () =>
         renderStudentsTable(currentStudents);
     });
 
+    searchStudentInput.addEventListener('input', () =>
+        {
+            const query = searchStudentInput.value.trim();
+            fetchAndDisplayStudents(query);
+        });
+
     addStudentForm.addEventListener('submit', async (event) =>
     {
         event.preventDefault();
@@ -140,14 +160,14 @@ document.addEventListener('DOMContentLoaded', () =>
             if (!name || isNaN(marks) || marks < 0 || marks > 100)
             {
                 isValid = false;
-                alert('Please fill in all required fields and ensure marks are between 0 and 100.');
+                showMessage('Please fill in all required fields and ensure marks are between 0 and 100.');
                 return;
             }
             subjects.push({ name, marks });
         });
 
         if (!isValid) {
-            alert('Please correct the errors in the form before submitting.');
+            showMessage('Please correct the errors in the form before submitting.');
             return;
         }
 
@@ -172,9 +192,9 @@ document.addEventListener('DOMContentLoaded', () =>
             {
                 const errorMessage = await response.text();
                 if (errorMessage.includes("already exists")) {
-                    alert(`Student ID '${studentId}' already taken. Please choose a different ID.`);
+                    showMessage(`Student ID '${studentId}' already taken. Please choose a different ID.`);
                 } else {
-                    alert(`Failed to add student: ${errorMessage}. Please try again.`);
+                   showMessage(`Failed to add student: ${errorMessage}. Please try again.`);
                 }
             }
             else if (!response.ok)
@@ -183,14 +203,14 @@ document.addEventListener('DOMContentLoaded', () =>
             }
             else
             {
-                alert('Student added successfully!');
+                showMessage('Student added successfully!');
                 addStudentForm.reset();
                 subjectsContainer.innerHTML = '';
                 subjectsContainer.appendChild(createSubjectInputGroup());
                 fetchAndDisplayStudents();
             }
         } catch (error) {
-            alert(`Failed to add student. A server error occurred. Please try again.`);
+            showMessage(`Failed to add student. A server error occurred. Please try again.`);
         }
     });
 

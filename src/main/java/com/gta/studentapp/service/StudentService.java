@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.stream.Collectors; 
 
 @Service
 public class StudentService {
@@ -116,9 +117,19 @@ public class StudentService {
     }
 
 
-public List<Student> getAllStudents() 
+public List<Student> getAllStudents(Optional<String> nameFilter) 
     {
+        if(nameFilter.isPresent() && !nameFilter.get().trim().isEmpty())
+        {
+            final String filterText = nameFilter.get().trim().toLowerCase();
+            return students.stream()
+             .filter(student -> student.getName().toLowerCase().contains(filterText))
+             .collect(Collectors.toCollection(ArrayList::new));
+        }
+        else
+        {
         return new ArrayList<>(students); 
+        }
     }
 
 public Optional<Student> getStudentById(String id) 
